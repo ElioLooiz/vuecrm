@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +7,8 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    meta: {layout: "main"},
+    component: () => import("@/views/Home.vue")
   },
   {
     path: "/login",
@@ -23,10 +23,10 @@ const routes = [
     component: () => import("@/views/Categories.vue")
   },
   {
-    path: "/detailRecord",
-    name: "DetailRecord",
+    path: "/detail",
+    name: "Detail",
     meta: {layout: "main"},
-    component: () => import("@/views/DetailRecord.vue")
+    component: () => import("@/views/Detail.vue")
   },
   {
     path: "/history",
@@ -35,10 +35,10 @@ const routes = [
     component: () => import("@/views/History.vue")
   },
   {
-    path: "/planing",
-    name: "Planing",
+    path: "/planning",
+    name: "Planning",
     meta: {layout: "main"},
-    component: () => import("@/views/Planing.vue")
+    component: () => import("@/views/Planning.vue")
   },
   {
     path: "/profile",
