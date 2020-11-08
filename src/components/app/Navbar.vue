@@ -5,12 +5,17 @@
         <a href="#" @click.prevent="$emit('click')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{date | date('datetime')}}</span>
+        <span class="black-text">{{ date | date("datetime") }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a class="dropdown-trigger black-text" href="#" ref="dropdown" data-target="dropdown">
+          <a
+            class="dropdown-trigger black-text"
+            href="#"
+            ref="dropdown"
+            data-target="dropdown"
+          >
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
           </a>
@@ -23,7 +28,7 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a  class="black-text" @click.prevent="logout">
+              <a class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>
@@ -42,24 +47,25 @@ export default {
     dropdown: null,
   }),
   methods: {
-    logout() {
-      console.log("logout");
-      this.$router.push('/login?message=logout');
-    }
-    
+    async logout() {
+      await this.$store.dispatch("logout");
+      this.$router.push("/login?message=logout");
+    },
   },
 
   mounted() {
-    this.interval = setInterval(()=>{
+    this.interval = setInterval(() => {
       this.date = new Date();
-    }, 1000)
-    this.dropdown = window.M.Dropdown.init(this.$refs.dropdown, {constrainWidth: true});
+    }, 1000);
+    this.dropdown = window.M.Dropdown.init(this.$refs.dropdown, {
+      constrainWidth: true,
+    });
   },
   beforeDestroy() {
     clearInterval(this.interval);
-    if(this.dropdown && this.dropdown.destroy) {
+    if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy();
     }
-  }
-}
+  },
+};
 </script>
